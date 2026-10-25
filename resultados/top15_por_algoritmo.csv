@@ -1,0 +1,16 @@
+posicion,counting_termino,counting_frecuencia,radix_termino,radix_frecuencia,bucket_termino,bucket_frecuencia
+1,learning,192,learning,192,learning,192
+2,literacy,169,literacy,169,literacy,169
+3,education,134,education,134,education,134
+4,research,122,research,122,research,122
+5,human,111,human,111,human,111
+6,studies,95,studies,95,studies,95
+7,students,87,students,87,students,87
+8,intelligence,80,intelligence,80,intelligence,80
+9,artificial,72,artificial,72,artificial,72
+10,review,70,review,70,review,70
+11,machine,66,machine,66,machine,66
+12,literature,55,literature,55,literature,55
+13,study,53,study,53,study,53
+14,collaboration,50,collaboration,50,collaboration,50
+15,fig,48,fig,48,fig,48
