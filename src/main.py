@@ -49,7 +49,7 @@ def main() -> None:
 
     cantidad_pdf = 0
     for archivo in CORPUS_DIR.iterdir():
-        if archivo.suffix.lower() == ".pdf":
+        if archivo.is_file() and archivo.suffix.lower() == ".pdf":
             cantidad_pdf += 1
 
     print(f"PDF encontrados en el corpus: {cantidad_pdf}")
@@ -59,9 +59,15 @@ def main() -> None:
         return
 
     if cantidad_pdf != 20:
-        print("ADVERTENCIA: el seguimiento indica un corpus de 20 artículos.")
+        raise SystemExit("Se requieren exactamente 20 artículos para analizar el corpus completo.")
 
     frecuencias, articulos = procesar_corpus(CORPUS_DIR)
+    guardar_estado_articulos(RESULTADOS_DIR / "estado_articulos.csv", articulos)
+    with (RESULTADOS_DIR / "abstracts_extraidos.txt").open("w", encoding="utf-8") as archivo:
+        for articulo in articulos:
+            archivo.write(articulo["archivo"] + "\n" + articulo.get("abstract", "") + "\n\n")
+    if any(not a["abstract_encontrado"] or not a["cantidad_terminos"] for a in articulos):
+        raise SystemExit("Corpus incompleto: revisa estado_articulos.csv y abstracts_extraidos.txt.")
     datos = convertir_a_lista(frecuencias)
 
     if len(datos) == 0:
@@ -99,6 +105,8 @@ def main() -> None:
         "CORRECTA" if valido_counting_bucket else "INCORRECTA",
     )
 
+    if not (valido_counting_radix and valido_counting_bucket):
+        raise SystemExit("Los algoritmos no coinciden; no se publica el ranking.")
     mostrar_top15(resultados["Counting Sort"])
 
     print("\nTiempos promedio")

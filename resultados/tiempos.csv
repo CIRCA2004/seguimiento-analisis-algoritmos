@@ -1,4 +1,4 @@
 algoritmo,repeticiones,promedio_ms,minimo_ms,maximo_ms
-Counting Sort,30,0.329303,0.276100,0.623700
-Radix Sort,30,1.260510,1.133700,1.855900
-Bucket Sort,30,0.837160,0.777000,1.211100
+Counting Sort,30,0.178900,0.157600,0.256100
+Radix Sort,30,0.456203,0.411500,0.598200
+Bucket Sort,30,0.444033,0.413800,0.544200
