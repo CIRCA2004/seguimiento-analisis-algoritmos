@@ -40,3 +40,5 @@ Solo se usa la ordenación estándar para nombres de archivo, nunca para el rank
 La copia de la entrada queda fuera del intervalo cronometrado.
 No se requiere extraer títulos/autores para este ranking: el PDF reserva esos
 metadatos para otros requerimientos que exijan cruce de información.
+
+AI se conserva como término relevante de dos letras y se normaliza a ai.

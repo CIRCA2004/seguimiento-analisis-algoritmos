@@ -29,7 +29,13 @@ class Pruebas(unittest.TestCase):
         self.assertEqual(extraer_abstract("Abstract: Summary.\n\nBody without heading."), "Summary.")
 
     def test_normalizacion(self):
-        self.assertEqual(tokenizar_abstract("Artiﬁcial edu-\ncation tech\xad\nnology the AI"), ["artificial", "education", "technology"])
+        self.assertEqual(tokenizar_abstract("Artiﬁcial edu-\ncation tech\xad\nnology the AI"), ["artificial", "education", "technology", "ai"])
+
+    def test_ai_se_conserva_sin_confundir_siglas(self):
+        self.assertEqual(
+            tokenizar_abstract("AI ai Ai AI-driven AI's AIED GenAI in of an"),
+            ["ai", "ai", "ai", "ai", "driven", "ai", "aied", "genai"],
+        )
 
     def test_corpus_completo(self):
         frecuencias, articulos = procesar_corpus(Path(__file__).resolve().parents[1] / "corpus")

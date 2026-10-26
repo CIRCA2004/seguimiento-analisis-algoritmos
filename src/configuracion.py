@@ -8,6 +8,9 @@ RESULTADOS_DIR = BASE_DIR / "resultados"
 # Cantidad de ejecuciones para obtener un tiempo promedio más estable
 REPETICIONES = 30
 
+# Términos del dominio que se conservan aunque tengan menos de tres letras.
+TERMINOS_CORTOS_RELEVANTES = {"ai"}
+
 # Lista básica de palabras vacías en inglés.
 # Se usa una lista propia para no depender de NLTK ni de descargas externas.
 STOPWORDS = {

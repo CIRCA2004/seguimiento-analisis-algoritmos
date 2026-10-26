@@ -14,7 +14,9 @@ editoriales requieren revisar los textos exportados; no se incluye OCR.
 Se aplica normalización Unicode NFKC antes de tokenizar (incluidas ligaduras),
 se unen cortes de palabra por salto de línea y guiones blandos, se convierten las
 palabras a minúsculas y se eliminan números, puntuación, stopwords y términos
-menores de tres letras. No se aplica stemming ni lematización. Estas son decisiones
+menores de tres letras, excepto AI (normalizado a ai), por su relevancia temática.
+AIED y GenAI se cuentan como términos distintos de AI.
+No se aplica stemming ni lematización. Estas son decisiones
 de preprocesamiento documentadas: el enunciado no especifica una lista de stopwords.
 Se cuenta manualmente la frecuencia global en un diccionario y se convierte a
 una lista de tuplas (término, frecuencia). Los empates conservan su orden inicial;
@@ -61,34 +63,34 @@ constantes universales ni una prueba de complejidad asintótica.
 
 | Algoritmo | Repeticiones | Promedio ms | Mínimo ms | Máximo ms |
 |---|---:|---:|---:|---:|
-| Counting Sort | 30 | 0.178900 | 0.157600 | 0.256100 |
-| Radix Sort | 30 | 0.456203 | 0.411500 | 0.598200 |
-| Bucket Sort | 30 | 0.444033 | 0.413800 | 0.544200 |
+| Counting Sort | 30 | 0.175437 | 0.157500 | 0.451100 |
+| Radix Sort | 30 | 0.423510 | 0.405500 | 0.485400 |
+| Bucket Sort | 30 | 0.429013 | 0.408500 | 0.504000 |
 
 ## Validación y resultados
-Se obtuvieron 988 términos distintos. Los tres rankings completos coinciden,
+Se obtuvieron 989 términos distintos. Los tres rankings completos coinciden,
 incluidos los empates. Esta tabla muestra el término y su frecuencia por algoritmo.
 
 | Posición | Counting Sort | Radix Sort | Bucket Sort |
 |---|---|---|---|
-| 1 | education (57) | education (57) | education (57) |
-| 2 | research (46) | research (46) | research (46) |
-| 3 | learning (40) | learning (40) | learning (40) |
-| 4 | aied (38) | aied (38) | aied (38) |
-| 5 | review (36) | review (36) | review (36) |
-| 6 | educational (33) | educational (33) | educational (33) |
-| 7 | assessment (32) | assessment (32) | assessment (32) |
-| 8 | intelligence (23) | intelligence (23) | intelligence (23) |
-| 9 | artificial (22) | artificial (22) | artificial (22) |
-| 10 | studies (21) | studies (21) | studies (21) |
-| 11 | higher (16) | higher (16) | higher (16) |
-| 12 | literature (15) | literature (15) | literature (15) |
-| 13 | technologies (15) | technologies (15) | technologies (15) |
-| 14 | systematic (15) | systematic (15) | systematic (15) |
-| 15 | study (15) | study (15) | study (15) |
+| 1 | ai (86) | ai (86) | ai (86) |
+| 2 | education (57) | education (57) | education (57) |
+| 3 | research (46) | research (46) | research (46) |
+| 4 | learning (40) | learning (40) | learning (40) |
+| 5 | aied (38) | aied (38) | aied (38) |
+| 6 | review (36) | review (36) | review (36) |
+| 7 | educational (33) | educational (33) | educational (33) |
+| 8 | assessment (32) | assessment (32) | assessment (32) |
+| 9 | intelligence (23) | intelligence (23) | intelligence (23) |
+| 10 | artificial (22) | artificial (22) | artificial (22) |
+| 11 | studies (21) | studies (21) | studies (21) |
+| 12 | higher (16) | higher (16) | higher (16) |
+| 13 | literature (15) | literature (15) | literature (15) |
+| 14 | technologies (15) | technologies (15) | technologies (15) |
+| 15 | systematic (15) | systematic (15) | systematic (15) |
 
 También se generan las gráficas top15_terminos.png y tiempos_algoritmos.png.
-Las cinco pruebas automatizadas verifican estabilidad y preservación de la entrada
+Las seis pruebas automatizadas verifican estabilidad y preservación de la entrada
 frente a una referencia independiente en casos aleatorios, encabezados espaciados,
 separación de columnas, normalización y agregación del corpus completo.
 El uso de sorted en las pruebas es exclusivamente una referencia de comprobación;
@@ -101,4 +103,5 @@ añade distribución y gestión de listas, por lo que su mayor coste constante p
 superar sus ventajas para este tamaño. Una sola lista no permite confirmar tasas
 de crecimiento: para ello se necesitarían entradas de tamaños y rangos variados.
 El ranking depende del preprocesamiento; no identifica automáticamente sinónimos
-ni agrupa singular/plural. education fue el término más frecuente (57 apariciones).
+ni agrupa singular/plural. ai fue el término más frecuente (86 apariciones),
+seguido de education (57).

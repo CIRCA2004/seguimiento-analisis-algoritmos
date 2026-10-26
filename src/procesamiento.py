@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pymupdf as fitz
 
-from configuracion import STOPWORDS
+from configuracion import STOPWORDS, TERMINOS_CORTOS_RELEVANTES
 
 
 def extraer_texto_pdf(ruta_pdf: Path) -> str:
@@ -64,7 +64,7 @@ def tokenizar_abstract(abstract: str) -> list[str]:
     Criterios utilizados:
     - minúsculas,
     - solo palabras formadas por letras,
-    - longitud mínima de 3 caracteres,
+    - longitud mínima de 3 caracteres, salvo términos cortos relevantes como AI,
     - eliminación de palabras vacías en inglés.
     """
     abstract = unicodedata.normalize("NFKC", abstract)
@@ -78,7 +78,7 @@ def tokenizar_abstract(abstract: str) -> list[str]:
     for palabra in palabras:
         palabra = normalizar_palabra(palabra)
 
-        if len(palabra) < 3:
+        if len(palabra) < 3 and palabra not in TERMINOS_CORTOS_RELEVANTES:
             continue
         if palabra in STOPWORDS:
             continue
